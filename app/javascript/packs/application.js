@@ -9,6 +9,8 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "bootstrap"
 require('jquery')
+require("channels")
+
 // global.$ = jQuery
 
 //= require jquery

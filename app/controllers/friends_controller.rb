@@ -5,7 +5,7 @@ class FriendsController < ApplicationController
 
   # GET /friends or /friends.json
   def index
-    @friends = Friend.all
+    @users = User.all.where.not(id: current_user) 
   end
 
   # GET /friends/1 or /friends/1.json
@@ -13,19 +13,22 @@ class FriendsController < ApplicationController
   end
 
   # GET /friends/new
-  def new
-    @friend = Friend.new
-    # @friend =current_user.friends.build()
+  # def new
+  #   @friend = Friend.new
+  #   # @friend =current_user.friends.build()
     
-  end
+  # end
 
   # GET /friends/1/edit
   def edit
   end
 
   # POST /friends or /friends.json
-  def create
-    @friend = Friend.new(friend_params)
+  def new
+    @friend = Friend.new()
+    @friend.requestor_id = current_user.id
+    @friend.receiver_id = params[:id]
+    @friend.status = "pending"
     # @friend =current_user.friends.build(friend_params)
     # @friend.user_id = current_user.id
 
@@ -75,6 +78,6 @@ class FriendsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def friend_params
-      params.require(:friend).permit(:first_name, :last_name, :phone_number, :description,:user_id)
+      params.require(:friend).permit(:requestor_id,:receiver_id,:status)
     end
 end

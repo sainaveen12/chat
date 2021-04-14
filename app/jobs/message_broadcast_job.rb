@@ -12,6 +12,8 @@ class MessageBroadcastJob < ApplicationJob
 	private
 
 	def broadcast_to_sender(user, message)
+		puts "=================="
+		puts "1111111111"
 		ActionCable.server.broadcast(
 			"conversations-#{user.id}",
 			message: message,
@@ -20,6 +22,8 @@ class MessageBroadcastJob < ApplicationJob
 	end
 
 	def broadcast_to_recipient(user, message)
+		puts "=================="
+		puts "222222222"
 		ActionCable.server.broadcast(
 			"conversations-#{user.id}",
 			message: render_message(message, user),
@@ -28,6 +32,8 @@ class MessageBroadcastJob < ApplicationJob
 	end
 
 	def render_message(message, user)
+		puts "=================="
+		puts "3333333333"
 		ApplicationController.render(
 			partial: 'messages/message',
 			locals: { message: message, user: user }

@@ -10,6 +10,7 @@ consumer.subscriptions.create("ConversationChannel", {
 	},
 
 	received: function(data) {
+		console.log("running received")
 		var conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
 		conversation.find('.messages-list').find('ul').append(data['message']);
 
@@ -19,6 +20,7 @@ consumer.subscriptions.create("ConversationChannel", {
 	},
 
 	speak: function(message) {
+		console.log("running speak")
 		return this.perform('speak',{
 			message: message
 		});

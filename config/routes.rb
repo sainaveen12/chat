@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :friends
+  # resources :friends
+  post 'friends/new'
+  get 'friends/index'
   devise_for :users
   resources :posts
   get 'welcome/index'
